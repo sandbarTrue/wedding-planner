@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 
 const navItems = [
   { href: '/', label: '看板', icon: '📋' },
+  { href: '/itinerary', label: '婚礼行程', icon: '🗓️' },
   { href: '/timeline', label: '时间线', icon: '📅' },
   { href: '/gantt', label: '甘特图', icon: '📊' },
   { href: '/process-overview', label: '总体流程', icon: '🗂️' },

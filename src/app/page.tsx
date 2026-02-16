@@ -7,9 +7,11 @@ import Calendar from '@/components/Calendar';
 import MonthlyTasks from '@/components/MonthlyTasks';
 import KeyProgress from '@/components/KeyProgress';
 import Link from 'next/link';
+import { weddingItinerary } from '@/data/wedding-data';
 
 const quickLinks = [
-  { href: '/timeline', label: '备婚时间线', icon: '📅', desc: '7个阶段完整规划' },
+  { href: '/itinerary', label: '婚礼行程', icon: '🗓️', desc: '9/27-10/3 两场行程' },
+  { href: '/timeline', label: '备婚时间线', icon: '📅', desc: '完整阶段规划' },
   { href: '/gantt', label: '甘特图', icon: '📊', desc: '任务时间跨度一览' },
   { href: '/process-overview', label: '总体流程表', icon: '🗂️', desc: '备婚全流程概览' },
   { href: '/budget', label: '预算控制表', icon: '💰', desc: '费用预算与追踪' },
@@ -43,6 +45,39 @@ export default function Home() {
         </Card>
       </div>
 
+      {/* Wedding Itinerary Mini */}
+      <Card title="婚礼行程" icon="🗓️">
+        <div className="flex gap-2 overflow-x-auto pb-2">
+          {weddingItinerary.map((item) => {
+            const date = new Date(item.date);
+            return (
+              <div
+                key={item.id}
+                className={`shrink-0 w-24 rounded-xl p-3 text-center ${
+                  item.isWedding
+                    ? 'bg-gradient-to-b from-pink-100 to-rose-100 border-2 border-pink-300'
+                    : 'bg-gray-50 border border-gray-100'
+                }`}
+              >
+                <div className="text-2xl mb-1">{item.icon}</div>
+                <div className={`text-xs font-bold ${item.isWedding ? 'text-pink-600' : 'text-gray-600'}`}>
+                  {date.getMonth() + 1}/{date.getDate()}
+                </div>
+                <div className={`text-[10px] mt-0.5 ${item.isWedding ? 'text-pink-500' : 'text-gray-400'}`}>
+                  {item.title}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <Link
+          href="/itinerary"
+          className="block text-center text-xs text-pink-500 hover:text-pink-600 mt-2 font-medium"
+        >
+          查看完整行程 →
+        </Link>
+      </Card>
+
       {/* Middle row: Monthly tasks + Key Progress */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card title="本月待办任务" icon="📝">
@@ -58,7 +93,7 @@ export default function Home() {
         <h2 className="text-lg font-semibold text-gray-700 mb-3 flex items-center gap-2">
           <span>🔗</span> 管理模板
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {quickLinks.map(link => (
             <Link
               key={link.href}

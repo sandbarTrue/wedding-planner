@@ -1,5 +1,28 @@
-// 婚礼日期
-export const WEDDING_DATE = '2025-10-03';
+// 婚礼日期 - 两场婚礼
+export const WEDDING_DATE = '2025-10-03'; // 主婚礼（彭州）用于主倒计时
+export const WEDDING_DATE_CQ = '2025-09-29'; // 重庆奉节婚礼（男方场）
+export const WEDDING_DATE_PZ = '2025-10-03'; // 彭州婚礼（女方场）
+
+// 婚礼行程数据
+export interface ItineraryItem {
+  id: string;
+  date: string;
+  title: string;
+  location: string;
+  icon: string;
+  description: string;
+  isWedding?: boolean;
+}
+
+export const weddingItinerary: ItineraryItem[] = [
+  { id: 'it-1', date: '2025-09-27', title: '出发去奉节', location: '成都 → 重庆奉节', icon: '🚗', description: '开车前往重庆市奉节县兴隆镇' },
+  { id: 'it-2', date: '2025-09-28', title: '接亲', location: '重庆奉节', icon: '🎊', description: '接人回来，婚前准备' },
+  { id: 'it-3', date: '2025-09-29', title: '重庆奉节婚礼', location: '重庆市奉节县兴隆镇', icon: '💒', description: '男方场婚礼仪式', isWedding: true },
+  { id: 'it-4', date: '2025-09-30', title: '前往彭州', location: '重庆奉节 → 成都彭州', icon: '🚗', description: '返回彭州，准备女方场婚礼' },
+  { id: 'it-5', date: '2025-10-01', title: '婚礼准备', location: '成都彭州市', icon: '📋', description: '彭州婚礼各项准备工作' },
+  { id: 'it-6', date: '2025-10-02', title: '婚礼准备', location: '成都彭州市', icon: '🎀', description: '最终布置、彩排、物品检查' },
+  { id: 'it-7', date: '2025-10-03', title: '彭州婚礼', location: '成都彭州市', icon: '💒', description: '女方场婚礼仪式', isWedding: true },
+];
 
 // 时间线阶段数据
 export interface SubTask {
@@ -33,8 +56,8 @@ export const timelinePhases: TimelinePhase[] = [
       {
         id: 'p1-t1',
         name: '双方父母见面',
-        startDate: '2024-10-01',
-        endDate: '2025-04-01',
+        startDate: '2025-02-22',
+        endDate: '2025-02-22',
         subTasks: [
           { id: 'p1-t1-s1', name: '确定婚期', details: '翻老黄历/尽量挑周末', completed: false },
           { id: 'p1-t1-s2', name: '商定彩礼嫁妆', details: '', completed: false },
@@ -95,8 +118,8 @@ export const timelinePhases: TimelinePhase[] = [
         startDate: '2025-01-01',
         endDate: '2025-04-01',
         subTasks: [
-          { id: 'p1-t6-s1', name: '预定婚宴酒店', details: '酒店至少提前半年以上预定好特别是结婚旺季', completed: false },
-          { id: 'p1-t6-s2', name: '预估宾客人数', details: '', completed: false },
+          { id: 'p1-t6-s1', name: '预定婚宴酒店（两场）', details: '酒店至少提前半年以上预定好特别是结婚旺季；需要分别预定奉节和彭州的酒店', completed: false },
+          { id: 'p1-t6-s2', name: '预估宾客人数（两场）', details: '分别估算两场婚礼的宾客人数', completed: false },
           { id: 'p1-t6-s3', name: '现场考察', details: '确认好场地费用婚宴菜单以及酒水费用等', completed: false },
         ],
       },
@@ -126,8 +149,8 @@ export const timelinePhases: TimelinePhase[] = [
       {
         id: 'p1-t9',
         name: '拍婚纱照',
-        startDate: '2025-04-01',
-        endDate: '2025-06-01',
+        startDate: '2025-03-25',
+        endDate: '2025-03-31',
         subTasks: [
           { id: 'p1-t9-s1', name: '选定婚纱照机构', details: '婚纱照提前4-6个月拍', completed: false },
           { id: 'p1-t9-s2', name: '女生物品准备', details: '必备美瞳防晒隐贴无痕内裤美甲脱毛驱蚊水便携风扇面包和水', completed: false },
@@ -198,17 +221,17 @@ export const timelinePhases: TimelinePhase[] = [
       {
         id: 'p3-t1',
         name: '订婚车',
-        startDate: '2025-08-01',
-        endDate: '2025-08-15',
+        startDate: '2025-07-20',
+        endDate: '2025-08-10',
         subTasks: [
-          { id: 'p3-t1-s1', name: '预定婚车', details: '', completed: false },
+          { id: 'p3-t1-s1', name: '预定婚车（两场）', details: '分别预定奉节和彭州的婚车', completed: false },
         ],
       },
       {
         id: 'p3-t2',
         name: '定婚车用花、手捧花',
-        startDate: '2025-08-01',
-        endDate: '2025-08-15',
+        startDate: '2025-07-20',
+        endDate: '2025-08-10',
         subTasks: [
           { id: 'p3-t2-s1', name: '婚车用花', details: '', completed: false },
           { id: 'p3-t2-s2', name: '手捧花', details: '', completed: false },
@@ -217,8 +240,8 @@ export const timelinePhases: TimelinePhase[] = [
       {
         id: 'p3-t3',
         name: '定甜品台甜品',
-        startDate: '2025-08-01',
-        endDate: '2025-08-20',
+        startDate: '2025-07-20',
+        endDate: '2025-08-15',
         subTasks: [
           { id: 'p3-t3-s1', name: '甜品台预定', details: '', completed: false },
         ],
@@ -226,7 +249,7 @@ export const timelinePhases: TimelinePhase[] = [
       {
         id: 'p3-t4',
         name: '购买结婚用品',
-        startDate: '2025-08-01',
+        startDate: '2025-07-20',
         endDate: '2025-08-30',
         subTasks: [
           { id: 'p3-t4-s1', name: '婚房装饰', details: '', completed: false },
@@ -239,42 +262,52 @@ export const timelinePhases: TimelinePhase[] = [
       {
         id: 'p3-t5',
         name: '酒店试菜并确定菜单',
-        startDate: '2025-08-01',
+        startDate: '2025-07-20',
         endDate: '2025-08-30',
         subTasks: [
-          { id: 'p3-t5-s1', name: '酒店试菜', details: '', completed: false },
-          { id: 'p3-t5-s2', name: '确定最终菜单', details: '', completed: false },
+          { id: 'p3-t5-s1', name: '奉节酒店试菜', details: '', completed: false },
+          { id: 'p3-t5-s2', name: '彭州酒店试菜', details: '', completed: false },
+          { id: 'p3-t5-s3', name: '确定最终菜单（两场）', details: '', completed: false },
         ],
       },
     ],
   },
   {
     id: 'phase-4',
-    name: '阶段四',
+    name: '阶段四（共用）',
     period: '婚礼前1个月',
     tasks: [
       {
-        id: 'p4-t1', name: '确定最终婚礼流程', startDate: '2025-09-01', endDate: '2025-09-10',
-        subTasks: [{ id: 'p4-t1-s1', name: '确定最终婚礼流程', details: '', completed: false }],
+        id: 'p4-t1', name: '确定最终婚礼流程（两场）', startDate: '2025-08-25', endDate: '2025-09-10',
+        subTasks: [
+          { id: 'p4-t1-s1', name: '确定奉节婚礼流程', details: '', completed: false },
+          { id: 'p4-t1-s2', name: '确定彭州婚礼流程', details: '', completed: false },
+        ],
       },
       {
-        id: 'p4-t2', name: '试妆并确定最终造型', startDate: '2025-09-01', endDate: '2025-09-10',
+        id: 'p4-t2', name: '试妆并确定最终造型', startDate: '2025-08-25', endDate: '2025-09-10',
         subTasks: [{ id: 'p4-t2-s1', name: '试妆确定造型', details: '', completed: false }],
       },
       {
         id: 'p4-t3', name: '准备红包袋', startDate: '2025-09-01', endDate: '2025-09-15',
-        subTasks: [{ id: 'p4-t3-s1', name: '准备红包袋', details: '', completed: false }],
+        subTasks: [{ id: 'p4-t3-s1', name: '准备红包袋（两场）', details: '', completed: false }],
       },
       {
         id: 'p4-t4', name: '请柬', startDate: '2025-09-01', endDate: '2025-09-15',
-        subTasks: [{ id: 'p4-t4-s1', name: '发送请柬', details: '', completed: false }],
+        subTasks: [
+          { id: 'p4-t4-s1', name: '发送奉节婚礼请柬', details: '', completed: false },
+          { id: 'p4-t4-s2', name: '发送彭州婚礼请柬', details: '', completed: false },
+        ],
       },
       {
-        id: 'p4-t5', name: '确定最终宾客名单', startDate: '2025-09-05', endDate: '2025-09-20',
-        subTasks: [{ id: 'p4-t5-s1', name: '确定宾客名单', details: '', completed: false }],
+        id: 'p4-t5', name: '确定最终宾客名单', startDate: '2025-09-01', endDate: '2025-09-20',
+        subTasks: [
+          { id: 'p4-t5-s1', name: '确定奉节宾客名单', details: '', completed: false },
+          { id: 'p4-t5-s2', name: '确定彭州宾客名单', details: '', completed: false },
+        ],
       },
       {
-        id: 'p4-t6', name: '安排外地宾客的住宿交通', startDate: '2025-09-10', endDate: '2025-09-25',
+        id: 'p4-t6', name: '安排外地宾客的住宿交通', startDate: '2025-09-05', endDate: '2025-09-20',
         subTasks: [{ id: 'p4-t6-s1', name: '安排住宿交通', details: '', completed: false }],
       },
       {
@@ -282,65 +315,109 @@ export const timelinePhases: TimelinePhase[] = [
         subTasks: [{ id: 'p4-t7-s1', name: '准备婚礼歌单', details: '', completed: false }],
       },
       {
-        id: 'p4-t8', name: '制作婚礼视频或婚纱照', startDate: '2025-09-01', endDate: '2025-09-25',
+        id: 'p4-t8', name: '制作婚礼视频或婚纱照', startDate: '2025-09-01', endDate: '2025-09-20',
         subTasks: [{ id: 'p4-t8-s1', name: '制作视频/婚纱照', details: '制作婚礼要播放的视频或者婚纱照', completed: false }],
       },
       {
-        id: 'p4-t9', name: '确定接亲流程', startDate: '2025-09-10', endDate: '2025-09-25',
+        id: 'p4-t9', name: '确定接亲流程', startDate: '2025-09-05', endDate: '2025-09-20',
         subTasks: [{ id: 'p4-t9-s1', name: '确定接亲流程', details: '', completed: false }],
       },
     ],
   },
   {
-    id: 'phase-5',
-    name: '阶段五',
-    period: '婚礼前1-2周',
+    id: 'phase-5a',
+    name: '阶段五A（奉节场）',
+    period: '奉节婚礼前1-2周',
     tasks: [
-      { id: 'p5-t1', name: '新娘试穿婚纱礼服', startDate: '2025-09-19', endDate: '2025-09-26', subTasks: [{ id: 'p5-t1-s1', name: '试穿婚纱礼服', details: '', completed: false }] },
-      { id: 'p5-t2', name: '安排婚礼人员', startDate: '2025-09-19', endDate: '2025-09-26', subTasks: [{ id: 'p5-t2-s1', name: '安排婚礼人员', details: '', completed: false }] },
-      { id: 'p5-t3', name: '形象管理', startDate: '2025-09-19', endDate: '2025-10-02', subTasks: [{ id: 'p5-t3-s1', name: '形象管理', details: '', completed: false }] },
-      { id: 'p5-t4', name: '准备婚礼誓言', startDate: '2025-09-19', endDate: '2025-09-28', subTasks: [{ id: 'p5-t4-s1', name: '撰写婚礼誓言', details: '', completed: false }] },
-      { id: 'p5-t5', name: '分装喜糖', startDate: '2025-09-22', endDate: '2025-09-28', subTasks: [{ id: 'p5-t5-s1', name: '分装喜糖', details: '', completed: false }] },
-      { id: 'p5-t6', name: '再次提醒宾客', startDate: '2025-09-25', endDate: '2025-09-28', subTasks: [{ id: 'p5-t6-s1', name: '提醒宾客', details: '', completed: false }] },
-      { id: 'p5-t7', name: '准备新娘急救包', startDate: '2025-09-22', endDate: '2025-09-28', subTasks: [{ id: 'p5-t7-s1', name: '准备急救包', details: '', completed: false }] },
-      { id: 'p5-t8', name: '分装红包', startDate: '2025-09-25', endDate: '2025-09-30', subTasks: [{ id: 'p5-t8-s1', name: '分装红包', details: '', completed: false }] },
-      { id: 'p5-t9', name: '新郎前7天理发', startDate: '2025-09-26', endDate: '2025-09-26', subTasks: [{ id: 'p5-t9-s1', name: '新郎理发', details: '', completed: false }] },
-      { id: 'p5-t10', name: '新娘染发', startDate: '2025-09-22', endDate: '2025-09-26', subTasks: [{ id: 'p5-t10-s1', name: '新娘染发', details: '', completed: false }] },
-      { id: 'p5-t11', name: '建立工作人员对接群', startDate: '2025-09-22', endDate: '2025-09-26', subTasks: [{ id: 'p5-t11-s1', name: '建立对接群', details: '', completed: false }] },
-      { id: 'p5-t12', name: '流程发给婚礼管家', startDate: '2025-09-26', endDate: '2025-09-28', subTasks: [{ id: 'p5-t12-s1', name: '发送流程', details: '', completed: false }] },
-      { id: 'p5-t13', name: '再次确认婚礼各项工作安排', startDate: '2025-09-26', endDate: '2025-09-30', subTasks: [{ id: 'p5-t13-s1', name: '确认工作安排', details: '', completed: false }] },
-      { id: 'p5-t14', name: '确定最后婚宴桌数', startDate: '2025-09-28', endDate: '2025-09-30', subTasks: [{ id: 'p5-t14-s1', name: '确定桌数', details: '', completed: false }] },
+      { id: 'p5a-t1', name: '新娘试穿婚纱礼服', startDate: '2025-09-15', endDate: '2025-09-22', subTasks: [{ id: 'p5a-t1-s1', name: '试穿婚纱礼服', details: '', completed: false }] },
+      { id: 'p5a-t2', name: '安排婚礼人员', startDate: '2025-09-15', endDate: '2025-09-22', subTasks: [{ id: 'p5a-t2-s1', name: '安排婚礼人员', details: '', completed: false }] },
+      { id: 'p5a-t3', name: '形象管理', startDate: '2025-09-15', endDate: '2025-09-26', subTasks: [{ id: 'p5a-t3-s1', name: '形象管理', details: '', completed: false }] },
+      { id: 'p5a-t4', name: '准备婚礼誓言', startDate: '2025-09-15', endDate: '2025-09-26', subTasks: [{ id: 'p5a-t4-s1', name: '撰写婚礼誓言', details: '', completed: false }] },
+      { id: 'p5a-t5', name: '分装喜糖（奉节）', startDate: '2025-09-18', endDate: '2025-09-25', subTasks: [{ id: 'p5a-t5-s1', name: '分装喜糖', details: '', completed: false }] },
+      { id: 'p5a-t6', name: '再次提醒宾客（奉节）', startDate: '2025-09-22', endDate: '2025-09-26', subTasks: [{ id: 'p5a-t6-s1', name: '提醒宾客', details: '', completed: false }] },
+      { id: 'p5a-t7', name: '准备新娘急救包', startDate: '2025-09-18', endDate: '2025-09-25', subTasks: [{ id: 'p5a-t7-s1', name: '准备急救包', details: '', completed: false }] },
+      { id: 'p5a-t8', name: '分装红包（奉节）', startDate: '2025-09-22', endDate: '2025-09-26', subTasks: [{ id: 'p5a-t8-s1', name: '分装红包', details: '', completed: false }] },
+      { id: 'p5a-t9', name: '新郎理发', startDate: '2025-09-22', endDate: '2025-09-22', subTasks: [{ id: 'p5a-t9-s1', name: '新郎理发', details: '婚礼前7天', completed: false }] },
+      { id: 'p5a-t10', name: '新娘染发', startDate: '2025-09-18', endDate: '2025-09-22', subTasks: [{ id: 'p5a-t10-s1', name: '新娘染发', details: '', completed: false }] },
+      { id: 'p5a-t11', name: '建立工作人员对接群（奉节）', startDate: '2025-09-18', endDate: '2025-09-22', subTasks: [{ id: 'p5a-t11-s1', name: '建立对接群', details: '', completed: false }] },
+      { id: 'p5a-t12', name: '流程发给婚礼管家', startDate: '2025-09-22', endDate: '2025-09-26', subTasks: [{ id: 'p5a-t12-s1', name: '发送流程', details: '', completed: false }] },
+      { id: 'p5a-t13', name: '确认婚礼各项工作安排', startDate: '2025-09-22', endDate: '2025-09-27', subTasks: [{ id: 'p5a-t13-s1', name: '确认工作安排', details: '', completed: false }] },
+      { id: 'p5a-t14', name: '确定最后婚宴桌数（奉节）', startDate: '2025-09-24', endDate: '2025-09-27', subTasks: [{ id: 'p5a-t14-s1', name: '确定桌数', details: '', completed: false }] },
     ],
   },
   {
-    id: 'phase-6',
-    name: '阶段六',
-    period: '婚礼前3天',
+    id: 'phase-6a',
+    name: '阶段六A（奉节场）',
+    period: '奉节婚礼前3天',
     tasks: [
-      { id: 'p6-t1', name: '购买酒水饮料零食', startDate: '2025-09-30', endDate: '2025-10-01', subTasks: [{ id: 'p6-t1-s1', name: '购买酒水饮料零食', details: '', completed: false }] },
-      { id: 'p6-t2', name: '找专人接外地宾客', startDate: '2025-09-30', endDate: '2025-10-01', subTasks: [{ id: 'p6-t2-s1', name: '安排接人', details: '', completed: false }] },
-      { id: 'p6-t3', name: '再次检查婚礼用品', startDate: '2025-09-30', endDate: '2025-10-01', subTasks: [{ id: 'p6-t3-s1', name: '检查用品', details: '', completed: false }] },
-      { id: 'p6-t4', name: '确定上菜时间以及细节', startDate: '2025-09-30', endDate: '2025-10-01', subTasks: [{ id: 'p6-t4-s1', name: '确定上菜细节', details: '', completed: false }] },
-      { id: 'p6-t5', name: '新娘婚前2-3天美甲', startDate: '2025-09-30', endDate: '2025-10-01', subTasks: [{ id: 'p6-t5-s1', name: '美甲', details: '', completed: false }] },
+      { id: 'p6a-t1', name: '购买酒水饮料零食', startDate: '2025-09-26', endDate: '2025-09-27', subTasks: [{ id: 'p6a-t1-s1', name: '购买酒水饮料零食', details: '', completed: false }] },
+      { id: 'p6a-t2', name: '找专人接外地宾客', startDate: '2025-09-26', endDate: '2025-09-27', subTasks: [{ id: 'p6a-t2-s1', name: '安排接人', details: '', completed: false }] },
+      { id: 'p6a-t3', name: '再次检查婚礼用品', startDate: '2025-09-26', endDate: '2025-09-27', subTasks: [{ id: 'p6a-t3-s1', name: '检查用品', details: '', completed: false }] },
+      { id: 'p6a-t4', name: '确定上菜时间以及细节', startDate: '2025-09-26', endDate: '2025-09-27', subTasks: [{ id: 'p6a-t4-s1', name: '确定上菜细节', details: '', completed: false }] },
+      { id: 'p6a-t5', name: '新娘美甲', startDate: '2025-09-26', endDate: '2025-09-27', subTasks: [{ id: 'p6a-t5-s1', name: '美甲', details: '', completed: false }] },
     ],
   },
   {
-    id: 'phase-7',
-    name: '阶段七',
-    period: '婚礼前1天',
+    id: 'phase-7a',
+    name: '阶段七A（奉节场）',
+    period: '奉节婚礼前1天（9月28日）',
     tasks: [
-      { id: 'p7-t1', name: '装饰婚房', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t1-s1', name: '装饰婚房', details: '', completed: false }] },
-      { id: 'p7-t2', name: '再次提醒四大人员到位的时间', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t2-s1', name: '提醒四大人员', details: '', completed: false }] },
-      { id: 'p7-t3', name: '再次确定婚礼视频和音乐', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t3-s1', name: '确定视频音乐', details: '', completed: false }] },
-      { id: 'p7-t4', name: '取婚纱礼服', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t4-s1', name: '取婚纱礼服', details: '', completed: false }] },
-      { id: 'p7-t5', name: '准备婚礼仪式用品', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t5-s1', name: '准备仪式用品', details: '', completed: false }] },
-      { id: 'p7-t6', name: '打印婚礼当天需要的表格', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t6-s1', name: '打印表格', details: '', completed: false }] },
-      { id: 'p7-t7', name: '熨烫晨袍', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t7-s1', name: '熨烫晨袍', details: '', completed: false }] },
-      { id: 'p7-t8', name: '婚礼彩排', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t8-s1', name: '婚礼彩排', details: '', completed: false }] },
-      { id: 'p7-t9', name: '整理好婚礼当天所需的物品', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t9-s1', name: '整理物品', details: '', completed: false }] },
-      { id: 'p7-t10', name: '脱毛、洗头、敷面膜', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t10-s1', name: '个人护理', details: '', completed: false }] },
-      { id: 'p7-t11', name: '手机、充电宝充电', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t11-s1', name: '充电准备', details: '', completed: false }] },
-      { id: 'p7-t12', name: '早点休息', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7-t12-s1', name: '早点休息', details: '', completed: false }] },
+      { id: 'p7a-t1', name: '装饰婚房', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t1-s1', name: '装饰婚房', details: '', completed: false }] },
+      { id: 'p7a-t2', name: '提醒四大人员到位时间', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t2-s1', name: '提醒四大人员', details: '', completed: false }] },
+      { id: 'p7a-t3', name: '确定婚礼视频和音乐', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t3-s1', name: '确定视频音乐', details: '', completed: false }] },
+      { id: 'p7a-t4', name: '取婚纱礼服', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t4-s1', name: '取婚纱礼服', details: '', completed: false }] },
+      { id: 'p7a-t5', name: '准备婚礼仪式用品', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t5-s1', name: '准备仪式用品', details: '', completed: false }] },
+      { id: 'p7a-t6', name: '打印婚礼当天需要的表格', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t6-s1', name: '打印表格', details: '', completed: false }] },
+      { id: 'p7a-t7', name: '熨烫晨袍', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t7-s1', name: '熨烫晨袍', details: '', completed: false }] },
+      { id: 'p7a-t8', name: '婚礼彩排', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t8-s1', name: '婚礼彩排', details: '', completed: false }] },
+      { id: 'p7a-t9', name: '整理好婚礼当天所需的物品', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t9-s1', name: '整理物品', details: '', completed: false }] },
+      { id: 'p7a-t10', name: '个人护理', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t10-s1', name: '脱毛、洗头、敷面膜', details: '', completed: false }] },
+      { id: 'p7a-t11', name: '充电准备', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t11-s1', name: '手机、充电宝充电', details: '', completed: false }] },
+      { id: 'p7a-t12', name: '早点休息', startDate: '2025-09-28', endDate: '2025-09-28', subTasks: [{ id: 'p7a-t12-s1', name: '早点休息', details: '', completed: false }] },
+    ],
+  },
+  {
+    id: 'phase-5b',
+    name: '阶段五B（彭州场）',
+    period: '彭州婚礼前1-2周',
+    tasks: [
+      { id: 'p5b-t1', name: '分装喜糖（彭州）', startDate: '2025-09-22', endDate: '2025-09-30', subTasks: [{ id: 'p5b-t1-s1', name: '分装喜糖', details: '', completed: false }] },
+      { id: 'p5b-t2', name: '再次提醒宾客（彭州）', startDate: '2025-09-26', endDate: '2025-10-01', subTasks: [{ id: 'p5b-t2-s1', name: '提醒宾客', details: '', completed: false }] },
+      { id: 'p5b-t3', name: '分装红包（彭州）', startDate: '2025-09-26', endDate: '2025-10-01', subTasks: [{ id: 'p5b-t3-s1', name: '分装红包', details: '', completed: false }] },
+      { id: 'p5b-t4', name: '建立工作人员对接群（彭州）', startDate: '2025-09-22', endDate: '2025-09-28', subTasks: [{ id: 'p5b-t4-s1', name: '建立对接群', details: '', completed: false }] },
+      { id: 'p5b-t5', name: '确认婚礼各项工作安排', startDate: '2025-09-28', endDate: '2025-10-02', subTasks: [{ id: 'p5b-t5-s1', name: '确认工作安排', details: '', completed: false }] },
+      { id: 'p5b-t6', name: '确定最后婚宴桌数（彭州）', startDate: '2025-09-28', endDate: '2025-10-01', subTasks: [{ id: 'p5b-t6-s1', name: '确定桌数', details: '', completed: false }] },
+    ],
+  },
+  {
+    id: 'phase-6b',
+    name: '阶段六B（彭州场）',
+    period: '彭州婚礼前3天',
+    tasks: [
+      { id: 'p6b-t1', name: '购买酒水饮料零食', startDate: '2025-09-30', endDate: '2025-10-01', subTasks: [{ id: 'p6b-t1-s1', name: '购买酒水饮料零食', details: '', completed: false }] },
+      { id: 'p6b-t2', name: '找专人接外地宾客', startDate: '2025-09-30', endDate: '2025-10-01', subTasks: [{ id: 'p6b-t2-s1', name: '安排接人', details: '', completed: false }] },
+      { id: 'p6b-t3', name: '再次检查婚礼用品', startDate: '2025-10-01', endDate: '2025-10-02', subTasks: [{ id: 'p6b-t3-s1', name: '检查用品', details: '', completed: false }] },
+      { id: 'p6b-t4', name: '确定上菜时间以及细节', startDate: '2025-10-01', endDate: '2025-10-02', subTasks: [{ id: 'p6b-t4-s1', name: '确定上菜细节', details: '', completed: false }] },
+      { id: 'p6b-t5', name: '新娘美甲', startDate: '2025-10-01', endDate: '2025-10-02', subTasks: [{ id: 'p6b-t5-s1', name: '美甲', details: '', completed: false }] },
+    ],
+  },
+  {
+    id: 'phase-7b',
+    name: '阶段七B（彭州场）',
+    period: '彭州婚礼前1天（10月2日）',
+    tasks: [
+      { id: 'p7b-t1', name: '装饰婚房', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t1-s1', name: '装饰婚房', details: '', completed: false }] },
+      { id: 'p7b-t2', name: '提醒四大人员到位时间', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t2-s1', name: '提醒四大人员', details: '', completed: false }] },
+      { id: 'p7b-t3', name: '确定婚礼视频和音乐', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t3-s1', name: '确定视频音乐', details: '', completed: false }] },
+      { id: 'p7b-t4', name: '取婚纱礼服', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t4-s1', name: '取婚纱礼服', details: '', completed: false }] },
+      { id: 'p7b-t5', name: '准备婚礼仪式用品', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t5-s1', name: '准备仪式用品', details: '', completed: false }] },
+      { id: 'p7b-t6', name: '打印婚礼当天需要的表格', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t6-s1', name: '打印表格', details: '', completed: false }] },
+      { id: 'p7b-t7', name: '熨烫晨袍', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t7-s1', name: '熨烫晨袍', details: '', completed: false }] },
+      { id: 'p7b-t8', name: '婚礼彩排', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t8-s1', name: '婚礼彩排', details: '', completed: false }] },
+      { id: 'p7b-t9', name: '整理好婚礼当天所需的物品', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t9-s1', name: '整理物品', details: '', completed: false }] },
+      { id: 'p7b-t10', name: '个人护理', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t10-s1', name: '脱毛、洗头、敷面膜', details: '', completed: false }] },
+      { id: 'p7b-t11', name: '充电准备', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t11-s1', name: '手机、充电宝充电', details: '', completed: false }] },
+      { id: 'p7b-t12', name: '早点休息', startDate: '2025-10-02', endDate: '2025-10-02', subTasks: [{ id: 'p7b-t12-s1', name: '早点休息', details: '', completed: false }] },
     ],
   },
 ];
@@ -378,8 +455,9 @@ export const defaultBudgetItems: BudgetItem[] = [
   { id: 'b3', category: '婚纱礼服', item: '敬酒服', budget: 1500, actual: 0, note: '' },
   { id: 'b4', category: '婚纱礼服', item: '新郎西装', budget: 3000, actual: 0, note: '' },
   { id: 'b5', category: '婚纱礼服', item: '伴娘服', budget: 2000, actual: 0, note: '' },
-  { id: 'b6', category: '婚宴酒店', item: '婚宴费用', budget: 50000, actual: 0, note: '' },
-  { id: 'b7', category: '婚宴酒店', item: '酒水饮料', budget: 5000, actual: 0, note: '' },
+  { id: 'b6', category: '婚宴酒店', item: '奉节婚宴费用', budget: 30000, actual: 0, note: '' },
+  { id: 'b6b', category: '婚宴酒店', item: '彭州婚宴费用', budget: 50000, actual: 0, note: '' },
+  { id: 'b7', category: '婚宴酒店', item: '酒水饮料（两场）', budget: 8000, actual: 0, note: '' },
   { id: 'b8', category: '婚礼策划', item: '策划费用', budget: 15000, actual: 0, note: '' },
   { id: 'b9', category: '婚礼策划', item: '场地布置', budget: 8000, actual: 0, note: '' },
   { id: 'b10', category: '四大金刚', item: '司仪', budget: 3000, actual: 0, note: '' },
@@ -389,7 +467,7 @@ export const defaultBudgetItems: BudgetItem[] = [
   { id: 'b14', category: '婚纱照', item: '拍摄套餐', budget: 8000, actual: 0, note: '' },
   { id: 'b15', category: '珠宝首饰', item: '钻戒', budget: 15000, actual: 0, note: '' },
   { id: 'b16', category: '珠宝首饰', item: '三金', budget: 20000, actual: 0, note: '' },
-  { id: 'b17', category: '婚车', item: '婚车租赁', budget: 3000, actual: 0, note: '' },
+  { id: 'b17', category: '婚车', item: '婚车租赁（两场）', budget: 5000, actual: 0, note: '' },
   { id: 'b18', category: '其他', item: '喜糖喜帖', budget: 3000, actual: 0, note: '' },
   { id: 'b19', category: '其他', item: '红包', budget: 5000, actual: 0, note: '' },
   { id: 'b20', category: '其他', item: '甜品台', budget: 3000, actual: 0, note: '' },
