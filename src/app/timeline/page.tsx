@@ -1,13 +1,108 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { timelinePhases } from '@/data/wedding-data';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import Card from '@/components/Card';
 import ProgressBar from '@/components/ProgressBar';
 
+function SubtaskNote({
+  subtaskId,
+  notes,
+  setNotes,
+}: {
+  subtaskId: string;
+  notes: Record<string, string>;
+  setNotes: (updater: (prev: Record<string, string>) => Record<string, string>) => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+  const note = notes[subtaskId] || '';
+
+  useEffect(() => {
+    if (editing && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [editing]);
+
+  const startEdit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDraft(note);
+    setEditing(true);
+  };
+
+  const save = () => {
+    const trimmed = draft.trim();
+    setNotes(prev => {
+      const next = { ...prev };
+      if (trimmed) {
+        next[subtaskId] = trimmed;
+      } else {
+        delete next[subtaskId];
+      }
+      return next;
+    });
+    setEditing(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      save();
+    } else if (e.key === 'Escape') {
+      setEditing(false);
+    }
+  };
+
+  if (editing) {
+    return (
+      <div className="mt-1" onClick={e => e.preventDefault()}>
+        <input
+          ref={inputRef}
+          type="text"
+          value={draft}
+          onChange={e => setDraft(e.target.value)}
+          onBlur={save}
+          onKeyDown={handleKeyDown}
+          placeholder="输入备注..."
+          className="w-full text-xs px-2 py-1 rounded-md border border-pink-300 bg-white focus:outline-none focus:ring-1 focus:ring-pink-400 text-gray-600 placeholder-gray-300"
+        />
+      </div>
+    );
+  }
+
+  if (note) {
+    return (
+      <div
+        className="mt-1 flex items-center gap-1 group/note cursor-pointer"
+        onClick={startEdit}
+      >
+        <span className="text-xs px-2 py-0.5 rounded bg-pink-50 text-pink-600 leading-relaxed break-all">
+          {note}
+        </span>
+        <span className="text-xs opacity-0 group-hover/note:opacity-100 transition-opacity flex-shrink-0">
+          ✏️
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={startEdit}
+      className="mt-1 text-xs text-gray-300 hover:text-pink-400 transition-colors"
+    >
+      添加备注...
+    </button>
+  );
+}
+
 export default function TimelinePage() {
   const [completedTasks, setCompletedTasks] = useLocalStorage<Record<string, boolean>>('wedding-completed-subtasks', {});
+  const [notes, setNotes] = useLocalStorage<Record<string, string>>('wedding-subtask-notes', {});
   const [expandedPhase, setExpandedPhase] = useState<string | null>('phase-1');
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
 
@@ -166,27 +261,33 @@ export default function TimelinePage() {
                                 : st.completed;
 
                               return (
-                                <label
-                                  key={st.id}
-                                  className="flex items-start gap-2 cursor-pointer group"
-                                >
-                                  <input
-                                    type="checkbox"
-                                    checked={isCompleted}
-                                    onChange={() => toggleSubTask(st.id)}
-                                    className="mt-0.5 w-4 h-4 rounded"
-                                  />
-                                  <div>
-                                    <span className={`text-sm ${
-                                      isCompleted ? 'line-through text-gray-400' : 'text-gray-600'
-                                    }`}>
-                                      {st.name}
-                                    </span>
-                                    {st.details && (
-                                      <p className="text-xs text-gray-400 mt-0.5">{st.details}</p>
-                                    )}
-                                  </div>
-                                </label>
+                                <div key={st.id} className="space-y-0">
+                                  <label
+                                    className="flex items-start gap-2 cursor-pointer group"
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      checked={isCompleted}
+                                      onChange={() => toggleSubTask(st.id)}
+                                      className="mt-0.5 w-4 h-4 rounded"
+                                    />
+                                    <div className="flex-1 min-w-0">
+                                      <span className={`text-sm ${
+                                        isCompleted ? 'line-through text-gray-400' : 'text-gray-600'
+                                      }`}>
+                                        {st.name}
+                                      </span>
+                                      {st.details && (
+                                        <p className="text-xs text-gray-400 mt-0.5">{st.details}</p>
+                                      )}
+                                      <SubtaskNote
+                                        subtaskId={st.id}
+                                        notes={notes}
+                                        setNotes={setNotes}
+                                      />
+                                    </div>
+                                  </label>
+                                </div>
                               );
                             })}
                           </div>
