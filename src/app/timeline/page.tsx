@@ -58,7 +58,7 @@ function SubtaskNote({
 
   if (editing) {
     return (
-      <div className="mt-1" onClick={e => e.preventDefault()}>
+      <div className="mt-0.5" onClick={e => { e.preventDefault(); e.stopPropagation(); }}>
         <input
           ref={inputRef}
           type="text"
@@ -76,12 +76,14 @@ function SubtaskNote({
   if (note) {
     return (
       <div
-        className="mt-1 flex items-center gap-1 group/note cursor-pointer"
+        className="mt-0.5 flex items-center gap-1 group/note cursor-pointer"
         onClick={startEdit}
       >
-        <span className="text-xs px-2 py-0.5 rounded bg-pink-50 text-pink-600 leading-relaxed break-all">
-          {note}
-        </span>
+        <div className="border-l-2 border-pink-300 pl-2">
+          <span className="text-xs text-gray-400 leading-relaxed break-all">
+            {note}
+          </span>
+        </div>
         <span className="text-xs opacity-0 group-hover/note:opacity-100 transition-opacity flex-shrink-0">
           ✏️
         </span>
@@ -93,9 +95,13 @@ function SubtaskNote({
     <button
       type="button"
       onClick={startEdit}
-      className="mt-1 text-xs text-gray-300 hover:text-pink-400 transition-colors"
+      className="mt-0.5 text-gray-300 hover:text-pink-400 transition-colors relative group/icon inline-flex items-center"
+      title="点击添加备注"
     >
-      添加备注...
+      <span className="text-xs">📝</span>
+      <span className="ml-1 text-[10px] text-gray-400 opacity-0 group-hover/icon:opacity-100 transition-opacity whitespace-nowrap">
+        点击添加备注
+      </span>
     </button>
   );
 }
@@ -254,39 +260,41 @@ export default function TimelinePage() {
                         </button>
 
                         {isTaskExpanded && (
-                          <div className="mt-3 pl-6 space-y-2 animate-slide-up">
+                          <div className="mt-3 pl-6 space-y-1.5 animate-slide-up">
                             {task.subTasks.map(st => {
                               const isCompleted = completedTasks[st.id] !== undefined
                                 ? completedTasks[st.id]
                                 : st.completed;
 
                               return (
-                                <div key={st.id} className="space-y-0">
-                                  <label
-                                    className="flex items-start gap-2 cursor-pointer group"
-                                  >
-                                    <input
-                                      type="checkbox"
-                                      checked={isCompleted}
-                                      onChange={() => toggleSubTask(st.id)}
-                                      className="mt-0.5 w-4 h-4 rounded"
-                                    />
-                                    <div className="flex-1 min-w-0">
-                                      <span className={`text-sm ${
-                                        isCompleted ? 'line-through text-gray-400' : 'text-gray-600'
-                                      }`}>
-                                        {st.name}
-                                      </span>
-                                      {st.details && (
-                                        <p className="text-xs text-gray-400 mt-0.5">{st.details}</p>
-                                      )}
+                                <div key={st.id}>
+                                  <div className="flex items-start gap-2">
+                                    <label className="flex items-start gap-2 cursor-pointer group flex-1 min-w-0">
+                                      <input
+                                        type="checkbox"
+                                        checked={isCompleted}
+                                        onChange={() => toggleSubTask(st.id)}
+                                        className="mt-0.5 w-4 h-4 rounded"
+                                      />
+                                      <div className="flex-1 min-w-0">
+                                        <span className={`text-sm ${
+                                          isCompleted ? 'line-through text-gray-400' : 'text-gray-600'
+                                        }`}>
+                                          {st.name}
+                                        </span>
+                                        {st.details && (
+                                          <p className="text-xs text-gray-400 mt-0.5">{st.details}</p>
+                                        )}
+                                      </div>
+                                    </label>
+                                    <div className="shrink-0">
                                       <SubtaskNote
                                         subtaskId={st.id}
                                         notes={notes}
                                         setNotes={setNotes}
                                       />
                                     </div>
-                                  </label>
+                                  </div>
                                 </div>
                               );
                             })}

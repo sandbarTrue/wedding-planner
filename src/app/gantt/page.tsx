@@ -9,7 +9,7 @@ const MONTH_NAMES = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8�
 
 export default function GanttPage() {
   const [completedTasks] = useLocalStorage<Record<string, boolean>>('wedding-completed-subtasks', {});
-  const [selectedYear, setSelectedYear] = useState(2025);
+  const [selectedYear, setSelectedYear] = useState(2026);
   const [viewRange, setViewRange] = useState<[number, number]>([0, 11]); // month range
 
   const allTasks = useMemo(() => {
@@ -119,6 +119,7 @@ export default function GanttPage() {
             >
               <option value={2024}>2024</option>
               <option value={2025}>2025</option>
+              <option value={2026}>2026</option>
             </select>
           </div>
           <div className="flex flex-wrap gap-1.5">
