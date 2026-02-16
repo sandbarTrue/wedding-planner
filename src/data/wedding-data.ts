@@ -67,7 +67,7 @@ export const timelinePhases: TimelinePhase[] = [
       {
         id: 'p1-t2',
         name: '求婚',
-        startDate: '2026-10-01',
+        startDate: '2025-10-01',
         endDate: '2026-03-01',
         subTasks: [
           { id: 'p1-t2-s1', name: '求婚时间', details: '', completed: true },
@@ -81,7 +81,7 @@ export const timelinePhases: TimelinePhase[] = [
       {
         id: 'p1-t3',
         name: '购买婚戒三金',
-        startDate: '2026-11-01',
+        startDate: '2025-11-01',
         endDate: '2026-04-01',
         subTasks: [
           { id: 'p1-t3-s1', name: '购买钻戒', details: '钻戒一般在求婚之前就已经买了', completed: true },
